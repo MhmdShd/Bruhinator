@@ -163,7 +163,7 @@ async def _play(ctx, *, search: str):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(str(url), download=False)
         URL = info['formats'][0]['url']
-    voice.play(discord.FFmpegPCMAudio(URL), before_options='-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5')
+    voice.play(discord.FFmpegPCMAudio(URL))
     await ctx.send(f':notes: **Playing** ')
 
 # disconnect from voice
