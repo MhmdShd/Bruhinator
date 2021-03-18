@@ -8,13 +8,12 @@ import urllib.parse, urllib.request, re
 from time import sleep
 from datetime import datetime
 
-
-
 bot = commands.Bot(command_prefix='.')
 no_access = " You don't have access to this command :/"
 owner = '<@!435088789048918017>'
 thumbs_up = '\N{THUMBS UP SIGN}'
 que = []
+
 
 def read_token():
   with open('token.txt', 'r') as f:
@@ -54,9 +53,9 @@ async def ping(ctx):
 
 # create channels
 @bot.command(aliases=['create', 'Create', 'CREATE'])
-async def _create(ctx,category: discord.CategoryChannel='', *, text=''):
+async def _create(ctx, category: discord.CategoryChannel = '', *, text=''):
     count = 0
-    if category =='' and text=='':
+    if category == '' and text == '':
         await ctx.send('`.create (valid category) (channels names separated by ;)`')
     else:
         if ctx.message.author.guild_permissions.manage_channels:
@@ -163,21 +162,21 @@ async def _play(ctx, *, search: str):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(str(url), download=False)
         URL = info['formats'][0]['url']
-    FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn',}
+    FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn', }
     player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
-    que.append(player)
-    start_playing(ctx, voice)
+    if len(que) == 0:
+        voice.play(player, after=lambda x=None: play_next(voice))
+        que.append(player)
+    else:
+        que.append(player)
 
-def start_playing(ctx, voice):
-    i = 0
-    while i < len(que):
-        try:
-            voice.play(que[i], after=lambda x=None: start_playing(ctx, voice) )
-            ctx.send(f':notes: **Playing** ')
-            que[i].remove()
-        except:
-            pass
-        i += 1
+
+def play_next(voice):
+    try:
+        player = que.pop(1)
+        voice.play(player, after=lambda x=None: play_next(voice))
+    except:
+        pass
 
 
 # disconnect from voice
@@ -190,10 +189,11 @@ async def _leave(ctx):
 
 @bot.command()
 async def clearqueue(ctx):
-  global que
+    global que
 
-  await que.clear()
-  await ctx.message.add_reaction(thumbs_up)
+    await que.clear()
+    await ctx.message.add_reaction(thumbs_up)
+
 
 # pause music
 @bot.command()
@@ -238,6 +238,7 @@ async def resume(ctx):
         await ctx.message.add_reaction(thumbs_up)
     else:
         await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
+    await play_next(voice)
 
 
 # clear message
@@ -245,8 +246,9 @@ async def resume(ctx):
 async def purge(ctx, ammount=1):
     await ctx.channel.purge(limit=ammount)
 
+
 @bot.command()
-async def calendar(ctx, user: discord.User = '', *, text = ''):
+async def calendar(ctx, user: discord.User = '', *, text=''):
     if user == '' and text == '':
         await ctx.send(f'`.calendar @user context;d/m/y;h:m`')
     else:
@@ -254,24 +256,23 @@ async def calendar(ctx, user: discord.User = '', *, text = ''):
         context = text.split(';')[0]
         date = text.split(';')[1]
         time = text.split(';')[2]
-        hour = time .split(':')[0]
+        hour = time.split(':')[0]
         minutes = time.split(':')[1]
         await ctx.send(f'I will remind {user.mention} to: {context} at {date}')
-        print (f'{date} / {time} / {hour} / {minutes}')
-        print (datetime.now().strftime("%x"))
-        print (datetime.now().strftime("%H"))
-        print (datetime.now().strftime("%M"))
+        print(f'{date} / {time} / {hour} / {minutes}')
+        print(datetime.now().strftime("%x"))
+        print(datetime.now().strftime("%H"))
+        print(datetime.now().strftime("%M"))
         while loop == 'yes':
-            if date == datetime.now().strftime("%x").replace('0','') and hour == datetime.now().strftime("%H") and minutes == datetime.now().strftime("%M"):
+            if date == datetime.now().strftime("%x").replace('0', '') and hour == datetime.now().strftime(
+                    "%H") and minutes == datetime.now().strftime("%M"):
                 await ctx.send(f'Hello, {user.mention}, i was told to remind you to: {context}')
                 loop = 'no'
 
 
-
-
 @bot.command()
-async def remind(ctx, user:discord.User = '', *, text= ''):
-    if user == '' and text =='':
+async def remind(ctx, user: discord.User = '', *, text=''):
+    if user == '' and text == '':
         await ctx.send(f'`.remind @user context;timer;unit(s / m / h)`')
     else:
         context = text.split(';')[0]
@@ -284,7 +285,7 @@ async def remind(ctx, user:discord.User = '', *, text= ''):
         elif smh == 'h':
             time = time * 60
         await ctx.send(f'I will remind {user.mention} to: {context} after {time} minutes')
-        sleep(time*60)
+        sleep(time * 60)
         await ctx.send(f'Hello, {user.mention}, i was told to remind you to: {context}')
 
 
@@ -302,5 +303,8 @@ async def ban(ctx, member: discord.Member, *, reason=None):
 
 @bot.command()
 async def inviteme(ctx):
-    await ctx.send('Here is the link to invite me to a server! : https://discord.com/api/oauth2/authorize?client_id=821806637496008745&permissions=8&scope=bot')
+    await ctx.send(
+        'Here is the link to invite me to a server! : https://discord.com/api/oauth2/authorize?client_id=821806637496008745&permissions=8&scope=bot')
+
+
 bot.run(token)
