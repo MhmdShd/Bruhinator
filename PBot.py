@@ -14,7 +14,7 @@ bot = commands.Bot(command_prefix='.')
 no_access = " You don't have access to this command :/"
 owner = '<@!435088789048918017>'
 thumbs_up = '\N{THUMBS UP SIGN}'
-
+que = []
 
 def read_token():
   with open('token.txt', 'r') as f:
@@ -141,7 +141,7 @@ async def _join(ctx):
 # play music
 @bot.command(aliases=['play', 'p', 'Play', 'PLAY'])
 async def _play(ctx, *, search: str):
-
+    global que
     try:
         await ctx.author.voice.channel.connect()
     except:
@@ -163,9 +163,22 @@ async def _play(ctx, *, search: str):
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(str(url), download=False)
         URL = info['formats'][0]['url']
-    FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
-    voice.play(discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
-    await ctx.send(f':notes: **Playing** ')
+    FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn',}
+    player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
+    que.append(player)
+    start_playing(ctx, voice)
+
+def start_playing(ctx, voice):
+    i = 0
+    while i < len(que):
+        try:
+            voice.play(que[i], after=lambda x=None: start_playing(ctx, voice) )
+            ctx.send(f':notes: **Playing** ')
+            que[i].remove()
+        except:
+            pass
+        i += 1
+
 
 # disconnect from voice
 @bot.command(aliases=['disconnect', 'DISCONNECT', 'Disconnect', 'leave', 'LEAVE', 'Leave', 'dc', 'DC', 'Dc'])
@@ -174,6 +187,13 @@ async def _leave(ctx):
     await voice.disconnect()
     await ctx.send('**Successfully disconnected** :thumbsup:')
 
+
+@bot.command()
+async def clearqueue(ctx):
+  global que
+
+  await que.clear()
+  await ctx.message.add_reaction(thumbs_up)
 
 # pause music
 @bot.command()
@@ -192,7 +212,7 @@ async def pause(ctx):
 
 # stop music
 @bot.command()
-async def stop(ctx):
+async def skip(ctx):
     if ctx.author.voice.channel == ctx.voice_client.channel:
         try:
             voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
@@ -222,7 +242,7 @@ async def resume(ctx):
 
 # clear message
 @bot.command()
-async def clear(ctx, ammount=1):
+async def purge(ctx, ammount=1):
     await ctx.channel.purge(limit=ammount)
 
 @bot.command()
