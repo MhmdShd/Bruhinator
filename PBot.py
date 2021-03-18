@@ -191,7 +191,7 @@ async def _leave(ctx):
 async def clearqueue(ctx):
     global que
 
-    await que.clear()
+    del list[:]
     await ctx.message.add_reaction(thumbs_up)
 
 
