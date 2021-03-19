@@ -209,7 +209,7 @@ async def pause(ctx):
     else:
         await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
 
-
+#f
 # stop music
 @bot.command()
 async def skip(ctx):
