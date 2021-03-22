@@ -173,7 +173,7 @@ async def _play(ctx, *, search: str):
 
 def play_next(voice):
     try:
-        player = que.pop(1)
+        player = que.pop(0)
         voice.play(player, after=lambda x=None: play_next(voice))
     except:
         pass
@@ -191,7 +191,7 @@ async def _leave(ctx):
 async def clearqueue(ctx):
     global que
 
-    del list[:]
+    await que.clear()
     await ctx.message.add_reaction(thumbs_up)
 
 
