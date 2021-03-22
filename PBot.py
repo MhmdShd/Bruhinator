@@ -209,10 +209,10 @@ async def pause(ctx):
     else:
         await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
 
-#f
+
 # stop music
-@bot.command()
-async def skip(ctx):
+@bot.command(aliases=['skip','next','s'])
+async def _skipcommand(ctx):
     if ctx.author.voice.channel == ctx.voice_client.channel:
         try:
             voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
