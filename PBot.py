@@ -139,7 +139,7 @@ async def _join(ctx):
 
 # play music
 @bot.command(aliases=['play', 'p', 'Play', 'PLAY'])
-async def _play(ctx, *, search: str):
+async def _playcommand(ctx, *, search: str):
     global que
     try:
         await ctx.author.voice.channel.connect()
