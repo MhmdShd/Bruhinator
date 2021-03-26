@@ -184,7 +184,7 @@ def play_next(voice):
         pass
 
 
-@bot.commad()
+@bot.command()
 async def repeat(ctx):
     global repeatMusic
     if repeatMusic:
