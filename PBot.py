@@ -175,25 +175,21 @@ async def _playcommand(ctx, *, search: str):
 
 def play_next(voice):
     try:
-        if not repeatMusic:
-            player = que.pop(0)
-        else:
-            player = que[0]
-            que.append(player)
+        player = que.pop(0)
         voice.play(player, after=lambda x=None: play_next(voice))
     except:
         pass
 
-
-@bot.command()
-async def repeat(ctx):
-    global repeatMusic
-    if repeatMusic:
-        repeatMusic = False
-        await ctx.send("**Song will not be repeated** :thumbsup:")
-    else:
-        repeatMusic = True
-        await ctx.send("**Song will be repeated** :thumbsup:")
+#
+# @bot.command()
+# async def repeat(ctx):
+#     global repeatMusic
+#     if repeatMusic:
+#         repeatMusic = False
+#         await ctx.send("**Song will not be repeated** :thumbsup:")
+#     else:
+#         repeatMusic = True
+#         await ctx.send("**Song will be repeated** :thumbsup:")
 
 
 # disconnect from voice
@@ -207,9 +203,8 @@ async def _leave(ctx):
 @bot.command()
 async def clearqueue(ctx):
     global que
-
-    await que.clear()
     await ctx.message.add_reaction(thumbs_up)
+    que.clear()
 
 
 # pause music
