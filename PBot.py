@@ -13,15 +13,17 @@ no_access = " You don't have access to this command :/"
 owner = '<@!435088789048918017>'
 thumbs_up = '\N{THUMBS UP SIGN}'
 que = []
+repeatMusic = False
 
 
 def read_token():
-  with open('token.txt', 'r') as f:
-    lines = f.readlines()
-    return lines[0].strip()
+    with open('token.txt', 'r') as f:
+        lines = f.readlines()
+        return lines[0].strip()
 
 
 token = read_token()
+
 
 @bot.event
 async def on_ready():
@@ -173,10 +175,24 @@ async def _playcommand(ctx, *, search: str):
 
 def play_next(voice):
     try:
-        player = que.pop(0)
+        if not repeatMusic:
+            player = que.pop(0)
+        else:
+            player = que[0]
         voice.play(player, after=lambda x=None: play_next(voice))
     except:
         pass
+
+
+@bot.commad()
+async def repeat(ctx):
+    global repeatMusic
+    if repeatMusic:
+        repeatMusic = False
+        await ctx.send("**Song will not be repeated** :thumbsup:")
+    else:
+        repeatMusic = True
+        await ctx.send("**Song will be repeated** :thumbsup:")
 
 
 # disconnect from voice
@@ -211,7 +227,7 @@ async def pause(ctx):
 
 
 # stop music
-@bot.command(aliases=['skip','next','s'])
+@bot.command(aliases=['skip', 'next', 's'])
 async def _skipcommand(ctx):
     if ctx.author.voice.channel == ctx.voice_client.channel:
         try:
