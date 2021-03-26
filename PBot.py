@@ -179,6 +179,7 @@ def play_next(voice):
             player = que.pop(0)
         else:
             player = que[0]
+            que.append(player)
         voice.play(player, after=lambda x=None: play_next(voice))
     except:
         pass
