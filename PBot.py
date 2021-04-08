@@ -169,7 +169,7 @@ async def _playcommand(ctx, *, search: str):
     if len(que) == 0:
         voice.play(player, after=lambda x=None: play_next(voice))
         await ctx.send('**Song is being played**')
-        # que.append(player)
+        que.append(player)
     else:
         await ctx.send(f'**Song queued** {thumbs_up}')
         que.append(player)
