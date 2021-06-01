@@ -14,7 +14,7 @@ owner = '<@!435088789048918017>'
 thumbs_up = '\N{THUMBS UP SIGN}'
 que = []
 repeatMusic = False
-
+url = ''
 
 def read_token():
     with open('token.txt', 'r') as f:
@@ -143,6 +143,7 @@ async def _join(ctx):
 @bot.command(aliases=['play', 'p', 'Play', 'PLAY'])
 async def _playcommand(ctx, *, search: str):
     global que
+    global url
     try:
         await ctx.author.voice.channel.connect()
     except:
@@ -154,6 +155,7 @@ async def _playcommand(ctx, *, search: str):
     if 'https://' in search:
         url = search
     else:
+        await ctx.send(f'`searching for {search}`')
         query_string = urllib.parse.urlencode({'search_query': search})
         htm_content = urllib.request.urlopen(
             'http://www.youtube.com/results?' + query_string)
@@ -183,6 +185,12 @@ def play_next(voice):
         pass
 
 
+
+
+@bot.command()
+async def link(ctx):
+    global url
+    await ctx.send(f'song being played: {url}')
 
 # disconnect from voice
 @bot.command(aliases=['disconnect', 'DISCONNECT', 'Disconnect', 'leave', 'LEAVE', 'Leave', 'dc', 'DC', 'Dc'])
