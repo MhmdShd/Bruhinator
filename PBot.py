@@ -1,4 +1,3 @@
-import nacl
 import discord
 import youtube_dl
 from discord.ext import commands
@@ -152,7 +151,8 @@ async def _playcommand(ctx, *, search: str):
         else:
             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
             return
-    if repeat :
+    if repeat:
+        voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
         if 'https://' in search:
             url = search
         else:
@@ -179,6 +179,13 @@ async def _playcommand(ctx, *, search: str):
 
 
 def play_next(voice):
+    if repeat:
+        try:
+            player = que.pop(0)
+            que.append(player)
+            voice.play(player, after=lambda x=None: play_next(voice))
+        except:
+            pass
     try:
         player = que.pop(0)
         voice.play(player, after=lambda x=None: play_next(voice))
@@ -327,4 +334,3 @@ async def inviteme(ctx):
 
 
 bot.run(token)
-
