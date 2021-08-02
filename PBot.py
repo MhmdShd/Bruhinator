@@ -179,8 +179,7 @@ async def _playcommand(ctx, *, search: str):
 def play_next(voice):
     if repeat:
         try:
-            player = que.pop(0)
-            que.append(player)
+            player = que[0]
             voice.play(player, after=lambda x=None: play_next(voice))
         except:
             pass
