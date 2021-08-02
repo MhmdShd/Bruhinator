@@ -151,11 +151,9 @@ async def _playcommand(ctx, *, search: str):
         else:
             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
             return
-    
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-    if 'https://' in search:
-        url = search
-    else:
+        if 'https://' in search:
+            url = search
+        else:
             await ctx.send(f'`searching for {search}`')
             query_string = urllib.parse.urlencode({'search_query': search})
             htm_content = urllib.request.urlopen(
