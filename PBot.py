@@ -1,5 +1,5 @@
-import discord
 import nacl
+import discord
 import os
 import youtube_dl
 from discord.ext import commands
@@ -185,12 +185,18 @@ def play_next(voice):
         pass
 
 
-
-
 @bot.command()
 async def link(ctx):
     global url
     await ctx.send(f'song being played: {url}')
+
+
+@bot.command()
+async def repeat(ctx):
+    global url
+    await _playcommand(url)
+
+
 
 # disconnect from voice
 @bot.command(aliases=['disconnect', 'DISCONNECT', 'Disconnect', 'leave', 'LEAVE', 'Leave', 'dc', 'DC', 'Dc'])
@@ -320,3 +326,4 @@ async def inviteme(ctx):
 
 
 bot.run(token)
+
