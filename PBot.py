@@ -1,9 +1,7 @@
 import nacl
 import discord
-import os
 import youtube_dl
 from discord.ext import commands
-from discord.ext.commands import has_permissions
 import urllib.parse, urllib.request, re
 from time import sleep
 from datetime import datetime
@@ -15,6 +13,7 @@ thumbs_up = '\N{THUMBS UP SIGN}'
 que = []
 repeatMusic = False
 url = ''
+repeat = False
 
 def read_token():
     with open('token.txt', 'r') as f:
@@ -144,6 +143,7 @@ async def _join(ctx):
 async def _playcommand(ctx, *, search: str):
     global que
     global url
+    global repeat
     try:
         await ctx.author.voice.channel.connect()
     except:
@@ -152,29 +152,30 @@ async def _playcommand(ctx, *, search: str):
         else:
             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
             return
-    if 'https://' in search:
-        url = search
-    else:
-        await ctx.send(f'`searching for {search}`')
-        query_string = urllib.parse.urlencode({'search_query': search})
-        htm_content = urllib.request.urlopen(
-            'http://www.youtube.com/results?' + query_string)
-        search_results = re.findall(r'/watch\?v=(.{11})', htm_content.read().decode())
-        url = 'http://www.youtube.com/watch?v=' + search_results[0]
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-    ydl_opts = {'format': 'best'}
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(str(url), download=False)
-        URL = info['formats'][0]['url']
-    FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn', }
-    player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
-    if len(que) == 0:
-        voice.play(player, after=lambda x=None: play_next(voice))
-        await ctx.send('**Song is being played**')
-        que.append(player)
-    else:
-        await ctx.send(f'**Song queued** {thumbs_up}')
-        que.append(player)
+    if repeat :
+        if 'https://' in search:
+            url = search
+        else:
+            await ctx.send(f'`searching for {search}`')
+            query_string = urllib.parse.urlencode({'search_query': search})
+            htm_content = urllib.request.urlopen(
+                'http://www.youtube.com/results?' + query_string)
+            search_results = re.findall(r'/watch\?v=(.{11})', htm_content.read().decode())
+            url = 'http://www.youtube.com/watch?v=' + search_results[0]
+        voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+        ydl_opts = {'format': 'best'}
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(str(url), download=False)
+            URL = info['formats'][0]['url']
+        FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn', }
+        player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
+        if len(que) == 0:
+            voice.play(player, after=lambda x=None: play_next(voice))
+            await ctx.send('**Song is being played**')
+            que.append(player)
+        else:
+            await ctx.send(f'**Song queued** {thumbs_up}')
+            que.append(player)
 
 
 def play_next(voice):
@@ -193,8 +194,8 @@ async def link(ctx):
 
 @bot.command()
 async def repeat(ctx):
-    global url
-    await _playcommand(url)
+    global repeat
+    repeat = True
 
 
 
