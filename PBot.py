@@ -168,21 +168,24 @@ async def _playcommand(ctx, *, search: str):
         FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn', }
         player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
         if len(que) == 0:
+          if repeat:
+            voice.play(player, after=lambda x=None: repeat(ctx, voice))
+          else:
             voice.play(player, after=lambda x=None: play_next(voice))
-            await ctx.send('**Song is being played**')
-            que.append(player)
+          await ctx.send('**Song is being played**')
+          que.append(player)
         else:
-            await ctx.send(f'**Song queued** {thumbs_up}')
-            que.append(player)
+          await ctx.send(f'**Song queued** {thumbs_up}')
+          que.append(player)
 
         
 def play_next(voice):
-    if repeat:
-        try:
-            player = que[0]
-            voice.play(player, after=lambda x=None: play_next(voice))
-        except:
-            pass
+#     if repeat:
+#         try:
+#             player = que[0]
+#             voice.play(player, after=lambda x=None: play_next(voice))
+#         except:
+#             pass
     try:
         player = que.pop(0)
         voice.play(player, after=lambda x=None: play_next(voice))
