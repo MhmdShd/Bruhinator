@@ -169,7 +169,7 @@ async def _playcommand(ctx, *, search: str):
         player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
         if len(que) == 0:
           if repeat:
-            voice.play(player, after=lambda x=None: repeat(ctx, voice))
+            voice.play(player, after=lambda x=None: repeat(voice))
           else:
             voice.play(player, after=lambda x=None: play_next(voice))
           await ctx.send('**Song is being played**')
