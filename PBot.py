@@ -12,7 +12,7 @@ thumbs_up = '\N{THUMBS UP SIGN}'
 que = []
 repeatMusic = False
 url = ''
-repeat = False
+
 
 def read_token():
     with open('token.txt', 'r') as f:
@@ -168,10 +168,7 @@ async def _playcommand(ctx, *, search: str):
         FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn', }
         player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
         if len(que) == 0:
-          if repeat:
-            voice.play(player, after=lambda x=None: repeat(voice))
-          else:
-            voice.play(player, after=lambda x=None: play_next(voice))
+          voice.play(player, after=lambda x=None: play_next(voice))
           await ctx.send('**Song is being played**')
           que.append(player)
         else:
@@ -180,12 +177,6 @@ async def _playcommand(ctx, *, search: str):
 
         
 def play_next(voice):
-#     if repeat:
-#         try:
-#             player = que[0]
-#             voice.play(player, after=lambda x=None: play_next(voice))
-#         except:
-#             pass
     try:
         player = que.pop(0)
         voice.play(player, after=lambda x=None: play_next(voice))
