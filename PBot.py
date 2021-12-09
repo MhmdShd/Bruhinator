@@ -303,7 +303,7 @@ async def remind(ctx, user: discord.User = '', *, text=''):
         
         
 @bot.command()
-async def start(ctx,*,text=''):
+async def activity(ctx,*,text=''):
     if (text == ''):
         embed = discord.Embed(
             title="Activites Available:\n",
