@@ -4,6 +4,7 @@ from discord.ext import commands
 import urllib.parse, urllib.request, re
 from time import sleep
 from datetime import datetime
+from discord_together import DiscordTogether
 
 bot = commands.Bot(command_prefix='.')
 no_access = " You don't have access to this command :/"
@@ -25,6 +26,7 @@ token = read_token()
 
 @bot.event
 async def on_ready():
+    bot.togetherControl = await DiscordTogether(token)
     print('-----_____ BOT ONLINE _____-----')
 
 
@@ -298,6 +300,29 @@ async def remind(ctx, user: discord.User = '', *, text=''):
         await ctx.send(f'I will remind {user.mention} to: {context} after {time} minutes')
         sleep(time * 60)
         await ctx.send(f'Hello, {user.mention}, i was told to remind you to: {context}')
+        
+        
+@bot.command()
+async def start(ctx,*,text=''):
+    if (text == ''):
+        embed = discord.Embed(
+            title="Activites Available:\n",
+            description=f"1. youtube\n2. poker\n3. chess\n4. betrayal\n5. fishing\n6. awkword\n7. spellcast \n8. doodle-crew\n9, word-snack\n10. letter-tile\n11. checkers",
+            color=discord.Color.purple()
+        )
+        await ctx.send(embed=embed)
+    if (ctx.author.voice):
+        print('true')
+        link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text)
+        text = text.replace('-',' ')
+        embed = discord.Embed(
+            title=f"Your Activity is ready!\n",
+            description=f"[{text}]({link})",
+            color=discord.Color.green()
+        )
+        await ctx.send(embed=embed)
+    else:
+        await ctx.send('Please connect to a voice channel first!')
 
 
 # kick members
