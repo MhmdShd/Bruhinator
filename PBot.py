@@ -42,11 +42,6 @@ async def on_message(messages):
     await bot.process_commands(messages)
 
 
-# mention owner
-@bot.command()
-async def owner(ctx):
-    await ctx.send('I was programmed by <@!435088789048918017>')
-
 
 # get bot ping
 @bot.command()
@@ -54,78 +49,7 @@ async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency * 1000)}ms ')
 
 
-# create channels
-@bot.command(aliases=['create', 'Create', 'CREATE'])
-async def _create(ctx, category: discord.CategoryChannel = '', *, text=''):
-    count = 0
-    if category == '' and text == '':
-        await ctx.send('`.create (valid category) (channels names separated by ;)`')
-    else:
-        if ctx.message.author.guild_permissions.manage_channels:
-            channels = str(text).split(';')
-            for channel in channels:
-                await ctx.guild.create_text_channel(channel, category=category)
-                count += 1
-        else:
-            await ctx.send(no_access)
-            return
-        await ctx.send(f'Created {count} Text channels!')
 
-
-# delete channels
-@bot.command(aliases=['DELETE', 'Delete', 'delete'])
-async def _delete(ctx, *, channels_roles=""):
-    count = 0
-    if ctx.message.author.guild_permissions.manage_channels:
-        if channels_roles == "":
-            await ctx.send('`.delete (channel names separated by a ; )`')
-            return
-        x = channels_roles.split(';')
-        for Channel in x:
-            channel = discord.utils.get(ctx.guild.text_channels, name=Channel)
-            await channel.delete()
-            count += 1
-    else:
-        await ctx.send(no_access)
-    await ctx.send(f'deleted {count} channels!')
-
-
-# create categories
-@bot.command(aliases=['CreateCategory', 'createCategory', 'createcategory'])
-async def _CreateCategory(ctx, *, text=''):
-    if ctx.message.author.guild_permissions.manage_channels:
-        count = 0
-        if text == '':
-            await ctx.send('`.createcategory (Category names separated with ;)`')
-            return
-        categories = text.split(';')
-        for category in categories:
-            await ctx.guild.create_category(category)
-            count += 1
-    else:
-        await ctx.send(no_access)
-    await ctx.send(f'Created {count} Categories!')
-
-
-# delete categories
-@bot.command(aliases=['deleteCategory', 'DeleteCategory', 'deletecategory'])
-async def _deletecAtegory(ctx, *, categories=""):
-    count = 0
-    if ctx.message.author.guild_permissions.manage_channels:
-        if categories == "":
-            await ctx.send('`.deletecategory (valid Category names separated ; )`')
-            return
-        x = categories.split(';')
-        for Category in x:
-            category = discord.utils.get(ctx.guild.categories, name=Category)
-            for channel in category.text_channels:
-                await channel.delete()
-            await category.delete()
-            count += 1
-    else:
-        await ctx.send(no_access)
-        return
-    await ctx.send(f'Deleted {count} Categories!')
 
 
 # MUSICCCCCCCCCCCC
@@ -133,7 +57,7 @@ async def _deletecAtegory(ctx, *, categories=""):
 # ---------------------
 # join voice
 @bot.command(aliases=['connect', 'CONNECT', 'Connect', 'join', 'JOIN', 'Join'])
-async def _join(ctx):
+async def _joinCommand(ctx):
     try:
         await ctx.author.voice.channel.connect()
     except:
@@ -142,7 +66,7 @@ async def _join(ctx):
 
 # play music
 @bot.command(aliases=['play', 'p', 'Play', 'PLAY'])
-async def _playcommand(ctx, *, search: str):
+async def _playCommand(ctx, *, search: str):
     global que
     global url
     try:
@@ -193,13 +117,15 @@ async def link(ctx):
 
 
 
-
 # disconnect from voice
 @bot.command(aliases=['disconnect', 'DISCONNECT', 'Disconnect', 'leave', 'LEAVE', 'Leave', 'dc', 'DC', 'Dc'])
-async def _leave(ctx):
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-    await voice.disconnect()
-    await ctx.send('**Successfully disconnected** :thumbsup:')
+async def _leaveCommand(ctx):
+    try:
+        voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+        await voice.disconnect()
+        await ctx.send('**Successfully disconnected** :thumbsup:')
+    except:
+        await ctx.send('I am not connected to any voice channel :(')
 
 
 @bot.command()
@@ -226,7 +152,7 @@ async def pause(ctx):
 
 # stop music
 @bot.command(aliases=['skip', 'next', 's'])
-async def _skipcommand(ctx):
+async def _skipCommand(ctx):
     if ctx.author.voice.channel == ctx.voice_client.channel:
         try:
             voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
