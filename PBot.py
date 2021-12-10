@@ -308,7 +308,7 @@ async def activity(ctx,*,text=''):
     if (text == ''):
         embed = discord.Embed(
             title="Activites Available:\n",
-            description=f"1. youtube\n2. poker\n3. chess\n4. betrayal\n5. fishing\n6. awkword\n7. spellcast \n8. doodle-crew\n9, word-snack\n10. letter-tile\n11. checkers",
+            description=f"1. youtube\n2. poker\n3. chess\n4. betrayal\n5. fishing\n6. awkword\n7. spellcast \n8. doodle-crew\n9. word-snack\n10. letter-tile\n11. checkers",
             color=discord.Color.purple()
         )
         await ctx.send(embed=embed)
