@@ -29,7 +29,7 @@ async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for Prefix ."))
     bot.togetherControl = await DiscordTogether(token)
     print('-----_____ BOT ONLINE _____-----')
-
+    print(f'{len(bot.guilds)}')
 
 # stupid commands
 @bot.event
