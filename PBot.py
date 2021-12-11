@@ -12,7 +12,7 @@ no_access = " You don't have access to this command :/"
 thumbs_up = '\N{THUMBS UP SIGN}'
 que = []
 url = ''
-
+bot.remove_command('help')
 
 def read_token():
     with open('token.txt', 'r') as f:
@@ -225,10 +225,12 @@ async def activity(ctx,*,text=''):
         await ctx.send('Please connect to a voice channel first!')
 
 
+
 @bot.command()
-async def inviteme(ctx):
-    await ctx.send(
-        'Here is the link to invite me to a server! : https://discord.com/api/oauth2/authorize?client_id=821806637496008745&permissions=8&scope=bot')
+async def help(ctx):
+    embed = discord.Embed(title = 'Help Center',description='**Music commands!**:\n\n1. `.join` **( i join your voice chat if i am free )**\n2. `.play [song name/link]` **( plays song! )**\n3. `.dc` / `.leave` /`.disconnect` **( i disconnect :( )**\n4. `.skip` / `.pause` / `.resume` / `.clearqueue` **( i think these are clear :D )**\n5. `.help` **( displays this message )** \n\n\n**Activities command!**\n\n1. `.activity [activity name]` **( sends a link with your desired activity! / without [activity name] i list all available activities )** ',color= discord.Color.green()
+    )
+    await ctx.send(embed = embed)
 
 
 bot.run(token)
