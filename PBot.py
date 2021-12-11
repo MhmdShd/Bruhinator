@@ -26,7 +26,7 @@ token = read_token()
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for Prefix ."))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for the . Prefix"))
     bot.togetherControl = await DiscordTogether(token)
     print('-----_____ BOT ONLINE _____-----')
     print(f'{len(bot.guilds)}')
@@ -58,10 +58,12 @@ async def ping(ctx):
 # join voice
 @bot.command(aliases=['connect', 'CONNECT', 'Connect', 'join', 'JOIN', 'Join'])
 async def _joinCommand(ctx):
-    try:
+    
+    if ctx.author.voice:
         await ctx.author.voice.channel.connect()
-    except:
-        await ctx.send(':x: **I am already connected to another channel.**')
+    else:
+        await ctx.send(':x: **You should be in a voice channel to use this command**')
+
 
 
 # play music
@@ -69,14 +71,26 @@ async def _joinCommand(ctx):
 async def _playCommand(ctx, *, search: str):
     global que
     global url
-    try:
-        await ctx.author.voice.channel.connect()
-    except:
-        if ctx.author.voice.channel == ctx.voice_client.channel:
-            print('already in voice channel')
-        else:
+    
+    
+    
+    if ctx.author.voice:
+        if !ctx.voice_client.channel:
+            await ctx.author.voice.channel.connect()
+        elif ctx.author.voice.channel != ctx.voice_client.channel:
             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
-            return
+    else:
+        await ctx.send(':x: **You should be in a voice channel to use this command**')
+    
+    
+#     try:
+#         await ctx.author.voice.channel.connect()
+#     except:
+#         if ctx.author.voice.channel == ctx.voice_client.channel:
+#             print('already in voice channel')
+#         else:
+#             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
+#             return
     if 'https://' in search:
         url = search
     else:
@@ -119,70 +133,90 @@ async def link(ctx):
 
 # disconnect from voice
 @bot.command(aliases=['disconnect', 'DISCONNECT', 'Disconnect', 'leave', 'LEAVE', 'Leave', 'dc', 'DC', 'Dc'])
-async def _leaveCommand(ctx):
-    try:
-        voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-        await voice.disconnect()
-        await ctx.send('**Successfully disconnected** :thumbsup:')
-    except:
-        await ctx.send('I am not connected to any voice channel :(')
+async def _leave(ctx):
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if not ctx.voice_client:
+        await ctx.send(':x: **I am not in a voice channel **:confused:')
+    else:
+        if ctx.author.voice:
+            if ctx.author.voice.channel == ctx.voice_client.channel:
+                await voice.disconnect()
+                await ctx.send('**Successfully disconnected** :thumbsup:')
+            else:
+                await ctx.send('**You should be in my voice channel to use this command**')
+        else:
+            await ctx.send("**You should be in my voice channel to use this command**")
 
 
 @bot.command()
 async def clearqueue(ctx):
     global que
-    await ctx.message.add_reaction(thumbs_up)
-    que.clear()
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if not ctx.voice_client:
+        await ctx.send(':x: **I am not in a voice channel **:confused:')
+    else:
+        if ctx.author.voice:
+            if ctx.author.voice.channel == ctx.voice_client.channel:
+                await ctx.message.add_reaction(thumbs_up)
+                que.clear()
+            else:
+                await ctx.send('**You should be in my voice channel to use this command**')
+        else:
+            await ctx.send("**You should be in my voice channel to use this command**")
 
 
 # pause music
 @bot.command()
 async def pause(ctx):
-    if ctx.author.voice.channel == ctx.voice_client.channel:
-        try:
-            voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-            voice.pause()
-        except:
-            await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in one')
-            return
-        await ctx.message.add_reaction(thumbs_up)
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if ctx.voice_client:
+        if ctx.author.voice:
+            if ctx.author.voice.channel == ctx.voice_client.channel:
+                voice.pause()
+                await ctx.message.add_reaction(thumbs_up)
+            else:
+                await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
+        else:
+            await ctx.send("**You should be in my voice channel to use this command**")
     else:
-        await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
+        await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in')
 
 
 # stop music
 @bot.command(aliases=['skip', 'next', 's'])
-async def _skipCommand(ctx):
-    if ctx.author.voice.channel == ctx.voice_client.channel:
-        try:
-            voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-            voice.stop()
-        except:
-            await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in one')
-            return
-        await ctx.message.add_reaction(thumbs_up)
+async def _skipcommand(ctx):
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if ctx.voice_client:
+        if ctx.author.voice:
+            if ctx.author.voice.channel == ctx.voice_client.channel:
+                voice.stop()
+                await ctx.message.add_reaction(thumbs_up)
+            else:
+                await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
+        else:
+            await ctx.send("**You should be in my voice channel to use this command**")
     else:
-        await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
-
+        await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in')
 
 # resume music
 @bot.command()
 async def resume(ctx):
-    if ctx.author.voice.channel == ctx.voice_client.channel:
-        try:
-            voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-            voice.resume()
-        except:
-            await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in one')
-            return
-        await ctx.message.add_reaction(thumbs_up)
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if ctx.voice_client:
+        if ctx.author.voice:
+            if ctx.author.voice.channel == ctx.voice_client.channel:
+                voice.resume()
+                await ctx.message.add_reaction(thumbs_up)
+            else:
+                await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
+        else:
+            await ctx.send("**You should be in my voice channel to use this command**")
     else:
-        await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
-    await play_next(voice)
-
+        await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in')
 
 # clear message
 @bot.command()
+@has_permissions(manage_messages=True)
 async def purge(ctx, ammount=1):
     await ctx.channel.purge(limit=ammount)
 
@@ -254,12 +288,14 @@ async def activity(ctx,*,text=''):
 
 # kick members
 @bot.command()
+@has_permissions(manage_messages=True, manage_roles=True, manage_channels=True)
 async def kick(ctx, member: discord.Member, *, reason=None):
     await member.kick(reason=reason)
 
 
 # ban members
 @bot.command()
+@has_permissions(manage_messages=True, manage_roles=True, manage_channels=True)
 async def ban(ctx, member: discord.Member, *, reason=None):
     await member.ban(reason=reason)
 
