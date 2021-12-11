@@ -25,7 +25,7 @@ token = read_token()
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for the . Prefix"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for the .help"))
     bot.togetherControl = await DiscordTogether(token)
     print('-----_____ BOT ONLINE _____-----')
     print(f'{len(bot.guilds)}')
