@@ -25,7 +25,7 @@ token = read_token()
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for the .help"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for .help"))
     bot.togetherControl = await DiscordTogether(token)
     print('-----_____ BOT ONLINE _____-----')
     print(f'{len(bot.guilds)}')
@@ -228,7 +228,7 @@ async def activity(ctx,*,text=''):
 
 @bot.command()
 async def help(ctx):
-    embed = discord.Embed(title = 'Help Center',description='**Music commands!**:\n\n1. `.join` **( i join your voice chat if i am free )**\n2. `.play [song name/link]` **( plays song! )**\n3. `.dc` / `.leave` /`.disconnect` **( i disconnect :( )**\n4. `.skip` / `.pause` / `.resume` / `.clearqueue` **( i think these are clear :D )**\n5. `.help` **( displays this message )** \n\n\n**Activities command!**\n\n1. `.activity [activity name]` **( sends a link with your desired activity! / without [activity name] i list all available activities )** ',color= discord.Color.green()
+    embed = discord.Embed(title = 'Help Center',description='**Music commands!**:\n\n1. `.join` **( i join your voice chat if i am free )**\n2. `.play [song name/link]` **( plays song! )**\n3. `.dc` / `.leave` /`.disconnect` **( i disconnect :( )**\n4. `.skip` / `.pause` / `.resume` / `.clearqueue` **( i think these are clear :D )**\n5. `.help` **( displays this message )** \n\n\n**Activities command!**\n\n1. `.activity [activity name]` **( sends a link with your desired activity! / without [activity name] i list all available activities )** \n\nadd Andr0x#8929 for support and suggestions',color= discord.Color.green()
     )
     await ctx.send(embed = embed)
 
