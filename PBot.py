@@ -87,6 +87,7 @@ async def _playCommand(ctx, *, search: str):
             htm_content = urllib.request.urlopen('http://www.youtube.com/results?' + query_string)
             search_results = re.findall(r'/watch\?v=(.{11})', htm_content.read().decode())
             url = 'http://www.youtube.com/watch?v=' + search_results[0]
+            await ctx.send(f'**searching for** `{search}`')
         voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
         ydl_opts = {'format': 'best'}
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
@@ -96,7 +97,7 @@ async def _playCommand(ctx, *, search: str):
         player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
         if len(que) == 0:
             voice.play(player, after=lambda x=None: play_next(voice))
-            await ctx.send('**Song is being played**')
+            await ctx.send('**Song is being played**\ntype `.link` to send video link!')
             que.append(player)
         else:
             await ctx.send(f'**Song queued** {thumbs_up}')
