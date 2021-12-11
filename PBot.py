@@ -9,10 +9,8 @@ from discord.ext.commands import has_permissions
 
 bot = commands.Bot(command_prefix='.')
 no_access = " You don't have access to this command :/"
-owner = '<@!435088789048918017>'
 thumbs_up = '\N{THUMBS UP SIGN}'
 que = []
-repeatMusic = False
 url = ''
 
 
@@ -48,8 +46,6 @@ async def on_message(messages):
 @bot.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency * 1000)}ms ')
-
-
 
 
 
@@ -202,54 +198,7 @@ async def resume(ctx):
     else:
         await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in')
 
-# clear message
-@bot.command()
-@has_permissions(manage_messages=True)
-async def purge(ctx, ammount=1):
-    await ctx.channel.purge(limit=ammount)
 
-
-@bot.command()
-async def calendar(ctx, user: discord.User = '', *, text=''):
-    if user == '' and text == '':
-        await ctx.send(f'`.calendar @user context;d/m/y;h:m`')
-    else:
-        loop = 'yes'
-        context = text.split(';')[0]
-        date = text.split(';')[1]
-        time = text.split(';')[2]
-        hour = time.split(':')[0]
-        minutes = time.split(':')[1]
-        await ctx.send(f'I will remind {user.mention} to: {context} at {date}')
-        print(f'{date} / {time} / {hour} / {minutes}')
-        print(datetime.now().strftime("%x"))
-        print(datetime.now().strftime("%H"))
-        print(datetime.now().strftime("%M"))
-        while loop == 'yes':
-            if date == datetime.now().strftime("%x").replace('0', '') and hour == datetime.now().strftime(
-                    "%H") and minutes == datetime.now().strftime("%M"):
-                await ctx.send(f'Hello, {user.mention}, i was told to remind you to: {context}')
-                loop = 'no'
-
-
-@bot.command()
-async def remind(ctx, user: discord.User = '', *, text=''):
-    if user == '' and text == '':
-        await ctx.send(f'`.remind @user context;timer;unit(s / m / h)`')
-    else:
-        context = text.split(';')[0]
-        time = int(text.split(';')[1])
-        smh = text.split(';')[2]
-        if smh == 's':
-            time = time / 60
-        elif smh == "m":
-            time = time
-        elif smh == 'h':
-            time = time * 60
-        await ctx.send(f'I will remind {user.mention} to: {context} after {time} minutes')
-        sleep(time * 60)
-        await ctx.send(f'Hello, {user.mention}, i was told to remind you to: {context}')
-        
         
 @bot.command()
 async def activity(ctx,*,text=''):
@@ -272,20 +221,6 @@ async def activity(ctx,*,text=''):
         await ctx.send(embed=embed)
     else:
         await ctx.send('Please connect to a voice channel first!')
-
-
-# kick members
-@bot.command()
-@has_permissions(manage_messages=True, manage_roles=True, manage_channels=True)
-async def kick(ctx, member: discord.Member, *, reason=None):
-    await member.kick(reason=reason)
-
-
-# ban members
-@bot.command()
-@has_permissions(manage_messages=True, manage_roles=True, manage_channels=True)
-async def ban(ctx, member: discord.Member, *, reason=None):
-    await member.ban(reason=reason)
 
 
 @bot.command()
