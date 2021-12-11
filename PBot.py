@@ -71,17 +71,15 @@ async def _joinCommand(ctx):
 async def _playCommand(ctx, *, search: str):
     global que
     global url
-    
-    
-    
     if ctx.author.voice:
-        if !ctx.voice_client.channel:
+        if not ctx.voice_client.channel:
             await ctx.author.voice.channel.connect()
+
         elif ctx.author.voice.channel != ctx.voice_client.channel:
             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
     else:
         await ctx.send(':x: **You should be in a voice channel to use this command**')
-    
+
     
 #     try:
 #         await ctx.author.voice.channel.connect()
