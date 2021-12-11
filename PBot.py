@@ -5,6 +5,7 @@ import urllib.parse, urllib.request, re
 from time import sleep
 from datetime import datetime
 from discord_together import DiscordTogether
+from discord.ext.commands import has_permissions
 
 bot = commands.Bot(command_prefix='.')
 no_access = " You don't have access to this command :/"
