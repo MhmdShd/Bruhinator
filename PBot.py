@@ -87,7 +87,7 @@ async def _playCommand(ctx, *, search: str):
         await ctx.send(':x: **You should be in a voice channel to use this command**')
         
     if ctx.author.voice and ctx.voice_client.channel == ctx.author.voice.channel:
-        if 'https://' in search:
+        if 'https://' in search or 'http://' in search:
             url = search
         else:
             query_string = urllib.parse.urlencode({'search_query': search})
