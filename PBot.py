@@ -56,9 +56,12 @@ async def ping(ctx):
 @bot.command(aliases=['connect', 'CONNECT', 'Connect', 'join', 'JOIN', 'Join'])
 async def _joinCommand(ctx):
     if ctx.author.voice:
+        VoiceChannel = ctx.author.voice.channel
         if not ctx.voice_client:
-            await ctx.author.voice.channel.connect()
-
+            if VoiceChannel.permissions_for(ctx.guild.me).connect:
+                await ctx.author.voice.channel.connect()
+            else:
+                await ctx.send("**I don't have access to your channel **:(")
         elif ctx.author.voice.channel != ctx.voice_client.channel:
             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
     else:
@@ -71,8 +74,12 @@ async def _playCommand(ctx, *, search: str):
     global url
 
     if ctx.author.voice:
+        VoiceChannel = ctx.author.voice.channel
         if not ctx.voice_client:
-            await ctx.author.voice.channel.connect()
+            if VoiceChannel.permissions_for(ctx.guild.me).connect:
+                await ctx.author.voice.channel.connect()
+            else:
+                await ctx.send("**I don't have access to your channel **:(")
         elif ctx.author.voice.channel != ctx.voice_client.channel:
             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
             
