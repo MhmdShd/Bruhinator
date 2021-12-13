@@ -236,11 +236,24 @@ async def activity(ctx,*,text=''):
     else:
         await ctx.send('Please connect to a voice channel first!')
 
-
+@bot.command()
+async def servers(ctx):
+    await ctx.send(f'{len(bot.guilds)}')
 
 @bot.command()
 async def help(ctx):
-    embed = discord.Embed(title = 'Help Center',description='**Music commands!**:\n\n1. `.join` **( i join your voice chat if i am free )**\n2. `.play [song name/link]` **( plays song! )**\n3. `.dc` / `.leave` /`.disconnect` **( i disconnect :( )**\n4. `.skip` / `.pause` / `.resume` / `.clearqueue` **( i think these are clear :D )**\n5. `.help` **( displays this message )** \n\n\n**Activities command!**\n\n1. `.activity [activity name]` **( sends a link with your desired activity! / without [activity name] i list all available activities )** \n\nadd Andr0x#8929 for support and suggestions',color= discord.Color.green()
+    embed = discord.Embed(title = 'Help Center',description=f'**Music commands!**:\n\n'
+                                                            '1. `.join` **( i join your voice chat if i am free )**\n'
+                                                            '2. `.play [song name/link]` **( plays song! )**\n'
+                                                            '3. `.dc` / `.leave` /`.disconnect` **( i disconnect :( )**''\n'
+                                                            '4. `.skip` / `.pause` / `.resume` / `.clearqueue` **( i think these are clear :D )**''\n'
+                                                            '5. `.help` **( displays this message )** ''\n''\n''\n'
+                                                            '**Activities command!**'
+                                                            '\n\n'
+                                                            '1. `.activity [activity name]` **( sends a link with your desired activity! / without [activity name] i list all available activities )** \n\n\n'
+                                                            '**The Nexus**\n'
+                                                            f'[invite me](https://discord.com/oauth2/authorize?client_id=821806637496008745&permissions=36816960&scope=bot)\n\n'
+                                                            'Created by: Andr0x#8929 feel free to add for support / suggestions', color=discord.Color.green()
     )
     await ctx.send(embed = embed)
 
