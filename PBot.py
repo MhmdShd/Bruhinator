@@ -22,7 +22,12 @@ def read_token():
 
 token = read_token()
 
-
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        em = discord.Embed(title=f"Error!!!", description=f"Command not found.\n\n`.help` for the list of commands", color=discord.Color.red())
+        await ctx.send(embed=em)
+        
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for .help"))
