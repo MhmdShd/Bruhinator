@@ -10,6 +10,7 @@ from discord.ext.commands import has_permissions
 bot = commands.Bot(command_prefix='.')
 no_access = " You don't have access to this command :/"
 thumbs_up = '\N{THUMBS UP SIGN}'
+cross = '❌'
 que = []
 url = ''
 bot.remove_command('help')
@@ -25,8 +26,14 @@ token = read_token()
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        em = discord.Embed(title=f"Error!!!", description=f"Command not found.\n\n`.help` for the list of commands", color=discord.Color.red())
-        await ctx.send(embed=em)
+        embed = discord.Embed(title=f"Error!!!", description=f"Command not found.\n\n`.help` for the list of commands", color=discord.Color.red())
+        try:
+            await ctx.send(embed = embed)
+        except:
+            try:
+                await ctx.send('no Perms to send **Embedded content** :( !')
+            except:
+                ctx.message.add_reaction(cross)
         
 @bot.event
 async def on_ready():
@@ -42,7 +49,7 @@ async def on_message(messages):
     if messages.content == 'gay confirmed?':
         await messages.channel.send('Indeed!')
     if mention in messages.content.split():
-        await messages.channel.send('Hey, i am just a bot :frowning: , try mentioning someone else!')
+        await messages.channel.send('Hey, i am just a bot :frowning: , try typing `.help`!')
     await bot.process_commands(messages)
 
 
@@ -232,10 +239,18 @@ async def activity(ctx,*,text=''):
             description=f"[{text}]({link})",
             color=discord.Color.green()
         )
-        await ctx.send(embed=embed)
+        try:
+            await ctx.send(embed = embed)
+        except:
+            try:
+                await ctx.send('no Perms to send **Embedded content** :( !')
+            except:
+                ctx.message.add_reaction(cross)
     else:
-        await ctx.send('Please connect to a voice channel first!')
-
+        try:
+            await ctx.send('Please connect to a voice channel first!')
+        except:
+            await ctx.message.add_reaction(cross)
 @bot.command()
 async def servers(ctx):
     await ctx.send(f'{len(bot.guilds)}')
@@ -255,7 +270,12 @@ async def help(ctx):
                                                             f'[invite me](https://discord.com/oauth2/authorize?client_id=821806637496008745&permissions=36816960&scope=bot)\n\n'
                                                             'Created by: Andr0x#8929 feel free to add for support / suggestions', color=discord.Color.green()
     )
-    await ctx.send(embed = embed)
-
+    try:
+        await ctx.send(embed = embed)
+    except:
+        try:
+           await ctx.send('no Perms to send **Embedded content** :( !')
+        except:
+           ctx.message.add_reaction(cross)
 
 bot.run(token)
