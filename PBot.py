@@ -33,7 +33,7 @@ async def on_command_error(ctx, error):
             try:
                 await ctx.send('no Perms to send **Embedded content** :( !')
             except:
-                ctx.message.add_reaction(cross)
+                await ctx.message.add_reaction(cross)
         
 @bot.event
 async def on_ready():
@@ -245,7 +245,7 @@ async def activity(ctx,*,text=''):
             try:
                 await ctx.send('no Perms to send **Embedded content** :( !')
             except:
-                ctx.message.add_reaction(cross)
+                await ctx.message.add_reaction(cross)
     else:
         try:
             await ctx.send('Please connect to a voice channel first!')
@@ -276,6 +276,6 @@ async def help(ctx):
         try:
            await ctx.send('no Perms to send **Embedded content** :( !')
         except:
-           ctx.message.add_reaction(cross)
+           await ctx.message.add_reaction(cross)
 
 bot.run(token)
