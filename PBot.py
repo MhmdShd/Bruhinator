@@ -229,7 +229,13 @@ async def activity(ctx,*,text=''):
             description=f"1. youtube\n2. poker\n3. chess\n4. betrayal\n5. fishing\n6. awkword\n7. spellcast \n8. doodle-crew\n9. word-snack\n10. letter-tile\n11. checkers",
             color=discord.Color.purple()
         )
-        await ctx.send(embed=embed)
+        try:
+            await ctx.send(embed = embed)
+        except:
+            try:
+                await ctx.send('no Perms to send **Embedded content** :( !')
+            except:
+                await ctx.message.add_reaction(cross)
     if (ctx.author.voice):
         print('true')
         link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text)
