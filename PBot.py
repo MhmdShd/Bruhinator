@@ -260,6 +260,18 @@ async def activity(ctx,*,text=''):
 @bot.command()
 async def servers(ctx):
     await ctx.send(f'{len(bot.guilds)}')
+    
+    
+    
+@bot.command()
+async def serversinv(ctx):
+    for guild in bot.guilds:
+        for c in guild.text_channels:
+            if c.permissions_for(guild.me).create_instant_invite:
+                invite = await c.create_invite()
+                await ctx.send(invite)
+                break
+    
 
 @bot.command()
 async def help(ctx):
