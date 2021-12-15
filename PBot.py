@@ -248,29 +248,30 @@ async def activity(ctx,*,text=''):
                 await ctx.send('no Perms to send **Embedded content** :( !')
             except:
                 await ctx.message.add_reaction(cross)
-    if (ctx.author.voice):
-        try:
-            link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text)
-        except:
-            await ctx.send(f"**{text}** is not a valid activity! (`.activity` for the available list)")
-        text = text.replace('-',' ')
-        embed = discord.Embed(
-            title=f"Your Activity is ready!\n",
-            description=f"[{text}]({link})",
-            color=discord.Color.green()
-        )
-        try:
-            await ctx.send(embed = embed)
-        except:
+    elif text != '':
+        if (ctx.author.voice):
             try:
-                await ctx.send('no Perms to send **Embedded content** :( !')
+                link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text)
+            except:
+                await ctx.send(f"**{text}** is not a valid activity! (`.activity` for the available list)")
+            text = text.replace('-',' ')
+            embed = discord.Embed(
+                title=f"Your Activity is ready!\n",
+                description=f"[{text}]({link})",
+                color=discord.Color.green()
+            )
+            try:
+                await ctx.send(embed = embed)
+            except:
+                try:
+                    await ctx.send('no Perms to send **Embedded content** :( !')
+                except:
+                    await ctx.message.add_reaction(cross)
+        else:
+            try:
+                await ctx.send('Please connect to a voice channel first!')
             except:
                 await ctx.message.add_reaction(cross)
-    else:
-        try:
-            await ctx.send('Please connect to a voice channel first!')
-        except:
-            await ctx.message.add_reaction(cross)
 @bot.command()
 async def servers(ctx):
     print(f"[.server], from [{ctx.message.guild.name}]")
