@@ -228,8 +228,8 @@ async def resume(ctx):
 async def activity(ctx,*,text=''):
     if (text == ''):
         embed = discord.Embed(
-            title="Activites Available:\n",
-            description=f"1. youtube\n2. poker\n3. chess\n4. betrayal\n5. fishing\n6. awkword\n7. spellcast \n8. doodle-crew\n9. word-snack\n10. letter-tile\n11. checkers",
+            title="Activites Available (by name):\n",
+            description=f"1. youtube\n2. poker\n3. chess\n4. betrayal\n5. fishing\n6. awkword\n7. spellcast \n8. doodle-crew\n9. word-snack\n10. letter-tile\n11. checkers\n\nuse .activity `activity name`",
             color=discord.Color.purple()
         )
         try:
@@ -240,8 +240,10 @@ async def activity(ctx,*,text=''):
             except:
                 await ctx.message.add_reaction(cross)
     if (ctx.author.voice):
-        print('true')
-        link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text)
+        try:
+            link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text)
+        except:
+            await ctx.send(f"**{text}** is not a valid activity! (`.activity` for the available list)")
         text = text.replace('-',' ')
         embed = discord.Embed(
             title=f"Your Activity is ready!\n",
