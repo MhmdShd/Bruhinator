@@ -70,6 +70,7 @@ async def ping(ctx):
 # join voice
 @bot.command(aliases=['connect', 'CONNECT', 'Connect', 'join', 'JOIN', 'Join'])
 async def _joinCommand(ctx):
+    print(f"[.join], from [{ctx.message.guild.name}]")
     if ctx.author.voice:
         VoiceChannel = ctx.author.voice.channel
         if not ctx.voice_client:
@@ -85,6 +86,7 @@ async def _joinCommand(ctx):
 # play music
 @bot.command(aliases=['play', 'p', 'Play', 'PLAY'])
 async def _playCommand(ctx, *, search: str):
+    print(f"[.play], from [{ctx.message.guild.name}]")
     global que
     global url
 
@@ -134,6 +136,7 @@ def play_next(voice):
 
 @bot.command()
 async def link(ctx):
+    print(f"[.link], from [{ctx.message.guild.name}]")
     global url
     await ctx.send(f'song being played: {url}')
 
@@ -142,6 +145,7 @@ async def link(ctx):
 # disconnect from voice
 @bot.command(aliases=['disconnect', 'DISCONNECT', 'Disconnect', 'leave', 'LEAVE', 'Leave', 'dc', 'DC', 'Dc'])
 async def _leave(ctx):
+    print(f"[.dc], from [{ctx.message.guild.name}]")
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     if not ctx.voice_client:
         await ctx.send(':x: **I am not in a voice channel **:confused:')
@@ -158,6 +162,7 @@ async def _leave(ctx):
 
 @bot.command()
 async def clearqueue(ctx):
+    print(f"[.clearqueue], from [{ctx.message.guild.name}]")
     global que
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     if not ctx.voice_client:
@@ -176,6 +181,7 @@ async def clearqueue(ctx):
 # pause music
 @bot.command()
 async def pause(ctx):
+    print(f"[.pause], from [{ctx.message.guild.name}]")
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     if ctx.voice_client:
         if ctx.author.voice:
@@ -193,6 +199,7 @@ async def pause(ctx):
 # stop music
 @bot.command(aliases=['skip', 'next', 's'])
 async def _skipcommand(ctx):
+    print(f"[.skip], from [{ctx.message.guild.name}]")
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     if ctx.voice_client:
         if ctx.author.voice:
@@ -209,6 +216,7 @@ async def _skipcommand(ctx):
 # resume music
 @bot.command()
 async def resume(ctx):
+    print(f"[.resume], from [{ctx.message.guild.name}]")
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     if ctx.voice_client:
         if ctx.author.voice:
@@ -226,6 +234,7 @@ async def resume(ctx):
         
 @bot.command()
 async def activity(ctx,*,text=''):
+    print(f"[.activity], from [{ctx.message.guild.name}]")
     if (text == ''):
         embed = discord.Embed(
             title="Activites Available (by name):\n",
@@ -264,12 +273,14 @@ async def activity(ctx,*,text=''):
             await ctx.message.add_reaction(cross)
 @bot.command()
 async def servers(ctx):
+    print(f"[.server], from [{ctx.message.guild.name}]")
     await ctx.send(f'{len(bot.guilds)}')
     
     
     
 @bot.command()
 async def serversinv(ctx):
+    print(f"[.serverinv], from [{ctx.message.guild.name}]")
     for guild in bot.guilds:
         for c in guild.text_channels:
             if c.permissions_for(guild.me).create_instant_invite:
@@ -280,6 +291,7 @@ async def serversinv(ctx):
 
 @bot.command()
 async def help(ctx):
+    print(f"[.help], from [{ctx.message.guild.name}]")
     embed = discord.Embed(title = 'Help Center',description=f'**Music commands!**:\n\n'
                                                             '1. `.join` **( i join your voice chat if i am free )**\n'
                                                             '2. `.play [song name/link]` **( plays song! )**\n'
