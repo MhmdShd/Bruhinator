@@ -34,7 +34,11 @@ async def on_command_error(ctx, error):
                 await ctx.send('no Perms to send **Embedded content** :( !')
             except:
                 await ctx.message.add_reaction(cross)
-        
+
+
+
+
+# hhwhgefwef
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for .help"))
