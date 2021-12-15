@@ -2,10 +2,7 @@ import discord
 import youtube_dl
 from discord.ext import commands
 import urllib.parse, urllib.request, re
-from time import sleep
-from datetime import datetime
 from discord_together import DiscordTogether
-from discord.ext.commands import has_permissions
 
 bot = commands.Bot(command_prefix='.')
 no_access = " You don't have access to this command :/"
@@ -99,10 +96,10 @@ async def _playCommand(ctx, *, search: str):
                 await ctx.send("**I don't have access to your channel **:(")
         elif ctx.author.voice.channel != ctx.voice_client.channel:
             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
-            
+
     else:
         await ctx.send(':x: **You should be in a voice channel to use this command**')
-        
+
     if ctx.author.voice and ctx.voice_client.channel == ctx.author.voice.channel:
         if 'https://' in search or 'http://' in search:
             url = search
@@ -111,17 +108,26 @@ async def _playCommand(ctx, *, search: str):
             htm_content = urllib.request.urlopen('http://www.youtube.com/results?' + query_string)
             search_results = re.findall(r'/watch\?v=(.{11})', htm_content.read().decode())
             url = 'http://www.youtube.com/watch?v=' + search_results[0]
-            await ctx.send(f'**searching for** `{search}`')
+            await ctx.send(f':mag: **searching for** `{search}`')
         voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
         ydl_opts = {'format': 'best'}
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(str(url), download=False)
+            duration = info['duration']/60
+            duration = str(duration).replace('.',':')[0:5]
+            print(duration)
+            title = info['title']
+            channel = info['channel']
+            channel_url = info['channel_url']
             URL = info['formats'][0]['url']
-        FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5','options': '-vn', }
+
+        FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+                          'options': '-vn', }
         player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
         if len(que) == 0:
             voice.play(player, after=lambda x=None: play_next(voice))
-            await ctx.send('**Song is being played**\ntype `.link` to send video link!')
+            embed = discord.Embed(title="Song played:", description=f"**Channel :** [{channel}]({channel_url})\n\n[{title}]({url})\n\n\nduration:  {duration}",color=discord.Color.blue())
+            await ctx.send(embed=embed)
             que.append(player)
         else:
             await ctx.send(f'**Song queued** {thumbs_up}')
