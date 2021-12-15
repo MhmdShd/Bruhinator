@@ -1,5 +1,5 @@
 import discord
-import youtube_dl
+import yt_dlp
 from discord.ext import commands
 import urllib.parse, urllib.request, re
 from discord_together import DiscordTogether
@@ -111,15 +111,14 @@ async def _playCommand(ctx, *, search: str):
             await ctx.send(f':mag: **searching for** `{search}`')
         voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
         ydl_opts = {'format': 'best'}
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(str(url), download=False)
             duration = info['duration']/60
             duration = str(duration).replace('.',':')[0:5]
-            print(duration)
             title = info['title']
             channel = info['channel']
             channel_url = info['channel_url']
-            URL = info['formats'][0]['url']
+            URL = info['formats'][3]['url']
 
         FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
                           'options': '-vn', }
