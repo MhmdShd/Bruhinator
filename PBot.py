@@ -30,7 +30,7 @@ async def on_command_error(ctx, error):
             try:
                 await ctx.send('no Perms to send **Embedded content** :( !')
             except:
-                await ctx.message.add_reaction(cross)
+                await ctx.message.author.send("I have no access to that channel.")
 
 
 
@@ -252,7 +252,7 @@ async def activity(ctx,*,text=''):
             try:
                 await ctx.send('no Perms to send **Embedded content** :( !')
             except:
-                await ctx.message.add_reaction(cross)
+                await ctx.message.author.send("I have no access to that channel.")
     elif text != '':
         if (ctx.author.voice):
             if text == 'youtube' or text == 'chess' or text == 'poker' or text == 'betrayal' or text == 'fishing' or text == 'awkword' or text == 'spellcast' or text == 'doodle-crew' or text == 'word-snack' or text == 'letter-tile' or text == 'checkers':
@@ -274,12 +274,12 @@ async def activity(ctx,*,text=''):
                 try:
                     await ctx.send('no Perms to send **Embedded content** :( !')
                 except:
-                    await ctx.message.add_reaction(cross)
+                    await ctx.message.author.send("I have no access to that channel.")
         else:
             try:
                 await ctx.send('Please connect to a voice channel first!')
             except:
-                await ctx.message.add_reaction(cross)
+                await ctx.message.author.send("I have no access to that channel.")
 @bot.command()
 async def servers(ctx):
     print(f"[.server], from [{ctx.message.guild.name}]")
@@ -318,8 +318,7 @@ async def help(ctx):
         await ctx.send(embed = embed)
     except:
         try:
-           await ctx.send('no Perms to send **Embedded content** :( !')
+            await ctx.send('no Perms to send **Embedded content** :( !')
         except:
-           await ctx.message.add_reaction(cross)
-
+            await ctx.message.author.send("I have no access to that channel.")
 bot.run(token)
