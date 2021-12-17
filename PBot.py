@@ -255,9 +255,12 @@ async def activity(ctx,*,text=''):
                 await ctx.message.add_reaction(cross)
     elif text != '':
         if (ctx.author.voice):
-            try:
-                link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text)
-            except:
+            if text == 'youtube' or text == 'chess' or text == 'poker' or text == 'betrayal' or text == 'fishing' or text == 'awkword' or text == 'spellcast' or text == 'doodle-crew' or text == 'word-snack' or text == 'letter-tile' or text == 'checkers':
+                try:
+                    link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text)
+                except:
+                    await ctx.send("I need Permission to **create invite** to your voice channel!")
+            else:
                 await ctx.send(f"**{text}** is not a valid activity! (`.activity` for the available list)")
             text = text.replace('-',' ')
             embed = discord.Embed(
