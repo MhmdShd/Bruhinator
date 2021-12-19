@@ -20,17 +20,17 @@ def read_token():
 
 token = read_token()
 
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandNotFound):
-        embed = discord.Embed(title=f"Error!!!", description=f"Command not found.\n\n`.help` for the list of commands", color=discord.Color.red())
-        try:
-            await ctx.send(embed = embed)
-        except:
-            try:
-                await ctx.send('no Perms to send **Embedded content** :( !')
-            except:
-                await ctx.message.author.send("I have no access to that channel.")
+# @bot.event
+# async def on_command_error(ctx, error):
+#     if isinstance(error, commands.CommandNotFound):
+#         embed = discord.Embed(title=f"Error!!!", description=f"Command not found.\n\n`.help` for the list of commands", color=discord.Color.red())
+#         try:
+#             await ctx.send(embed = embed)
+#         except:
+#             try:
+#                 await ctx.send('no Perms to send **Embedded content** :( !')
+#             except:
+#                 await ctx.message.author.send("I have no access to that channel.")
 
 
 
