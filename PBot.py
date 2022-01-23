@@ -349,7 +349,7 @@ async def remind(ctx, *, text=''):
             await asyncio.sleep(2)
             print(time)
             time -= 2
-        await ctx.send(f'Hello, {user.mention}, i was told to remind you to: {context}')
+        await ctx.send(f'Hello, {user.mention}, i was told to remind you about: {context}')
 
 
 
