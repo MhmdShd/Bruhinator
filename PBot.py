@@ -3,6 +3,7 @@ import yt_dlp
 from discord.ext import commands
 import urllib.parse, urllib.request, re
 from discord_together import DiscordTogether
+import asyncio
 
 bot = commands.Bot(command_prefix='.')
 no_access = " You don't have access to this command :/"
@@ -35,13 +36,13 @@ async def on_command_error(ctx, error):
 
 
 
-
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for .help"))
     bot.togetherControl = await DiscordTogether(token)
     print('-----_____ BOT ONLINE _____-----')
     print(f'{len(bot.guilds)}')
+
 
 # stupid commands
 @bot.event
@@ -147,7 +148,6 @@ async def link(ctx):
     await ctx.send(f'song being played: {url}')
 
 
-
 # disconnect from voice
 @bot.command(aliases=['disconnect', 'DISCONNECT', 'Disconnect', 'leave', 'LEAVE', 'Leave', 'dc', 'DC', 'Dc'])
 async def _leave(ctx):
@@ -219,6 +219,7 @@ async def _skipcommand(ctx):
     else:
         await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in')
 
+
 # resume music
 @bot.command()
 async def resume(ctx):
@@ -237,7 +238,6 @@ async def resume(ctx):
         await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in')
 
 
-        
 @bot.command()
 async def activity(ctx,*,text=''):
     print(f"[.activity], from [{ctx.message.guild.name}]")
@@ -281,13 +281,85 @@ async def activity(ctx,*,text=''):
                 await ctx.send('Please connect to a voice channel first!')
             except:
                 await ctx.message.author.send("I have no access to that channel.")
+
+
+@bot.command()
+async def start(ctx,*, text=''):
+    if text == '':
+        await ctx.send(f'`.start #channel;timer;unit(s/m/h/d);first_message;second_message`')
+    else:
+        Channel = text.split(';')[0].replace(' ','')
+        delay = text.split(';')[1]
+        smh = text.split(';')[2].lower()
+        first = text.split(';')[3]
+        second = text.split(';')[4]
+        time = int(delay)
+        if smh == 's':
+            unit = 'Second(s)'
+            time = time / 60
+        elif smh == "m":
+            unit = "Minute(s)"
+            time = time
+        elif smh == 'h':
+            unit = "Hour(s)"
+            time = time * 60
+        elif smh == 'd':
+            unit = "day(s)"
+            time = time * 60 * 24
+        time = time * 60
+        for channel in ctx.guild.channels:
+            if str(Channel) == "<#" + str(channel.id) + ">":
+                message = await ctx.send(f'<@{ctx.message.author.id}>, Timer started in <#{channel.id}> for {delay} {unit}.')
+                if first != ' ':
+                    await channel.send(first)
+                while float(time) > 0:
+                    hours = int(time / 3600)
+                    minutes = int(((time % 3600) / 3600) * 60)
+                    seconds = int((((time % 3600) % 60) / 60) * 60)
+                    time -= 5
+                    await message.edit(content=f'<@{ctx.message.author.id}>, message will be sent in {hours}:{minutes}:{seconds}.')
+                    await asyncio.sleep(5)
+                await channel.send(second)
+                await message.edit(content=f'<@{ctx.message.author.id}>, message sent in <#{channel.id}>.')
+
+
+@bot.command()
+async def remind(ctx, *, text=''):
+    if text == '':
+        await ctx.send(f'`.remind Duration;unit(s / m / h)`')
+    else:
+        unit = 'null'
+        user = ctx.messgae.author
+        context = text.split(';')[0]
+        time = float(text.split(';')[1])
+        smh = text.split(';')[2]
+        duration = time
+        if smh == 's':
+            unit = 'Second(s)'
+            time = time / 60
+        elif smh == "m":
+            unit = "Minute(s)"
+            time = time
+        elif smh == 'h':
+            unit = "Hour(s)"
+            time = time * 60
+        await ctx.send(f'{user.mention}, I will remind about: **{context}** after {duration} {unit}')
+        time *= 60
+        while float(time) >= 0:
+            await asyncio.sleep(2)
+            print(time)
+            time -= 2
+        await ctx.send(f'Hello, {user.mention}, i was told to remind you to: {context}')
+
+
+
+
 @bot.command()
 async def servers(ctx):
     print(f"[.server], from [{ctx.message.guild.name}]")
     await ctx.send(f'{len(bot.guilds)}')
     
-    
-    
+
 @bot.command()
 async def serversinv(ctx):
     print(f"[.serverinv], from [{ctx.message.guild.name}]")
@@ -302,18 +374,24 @@ async def serversinv(ctx):
 @bot.command()
 async def help(ctx):
     print(f"[.help], from [{ctx.message.guild.name}]")
-    embed = discord.Embed(title = 'Help Center',description=f'**Music commands!**:\n\n'
+    embed = discord.Embed(title = 'Help Center ( Prefix: `.`)',description=f'**Music commands!**:\n\n'
                                                             '1. `.join` **( i join your voice chat if i am free )**\n'
                                                             '2. `.play [song name/link]` **( plays song! )**\n'
-                                                            '3. `.dc` / `.leave` /`.disconnect` **( i disconnect :( )**''\n'
+                                                            '3. `.dc` / `.leave` /`.disconnect` **( i disconnect D: )**''\n'
                                                             '4. `.skip` / `.pause` / `.resume` / `.clearqueue` **( i think these are clear :D )**''\n'
-                                                            '5. `.help` **( displays this message )** ''\n''\n''\n'
-                                                            '**Activities command!**'
+                                                            '\n\n'
+                                                            '**Activities command!:**'
                                                             '\n\n'
                                                             '1. `.activity [activity name]` **( sends a link with your desired activity! / without [activity name] i list all available activities )** \n\n\n'
+                                                            '**Others!:**\n'
+                                                            '\n1. `.remind` **(i remind you about anything at any time you want)**'
+                                                            '\n2. `.start` **(i send a schedualed message in any channel that I have access to)**'
+                                                            '\n3. `.help` **( displays this message )** '
+                                                            '\n\n'
                                                             '**The Nexus**\n'
                                                             f'[invite me](https://discord.com/oauth2/authorize?client_id=821806637496008745&permissions=36816960&scope=bot)\n\n'
-                                                            'Created by: Andr0x#8929 feel free to add for support / suggestions', color=discord.Color.green()
+                                                            'Created by: Andr0x#8929 feel free to add for support / suggestions'
+                                                            '\n', color=discord.Color.green()
     )
     try:
         await ctx.send(embed = embed)
