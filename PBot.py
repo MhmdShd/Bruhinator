@@ -326,10 +326,10 @@ async def start(ctx,*, text=''):
 @bot.command()
 async def remind(ctx, *, text=''):
     if text == '':
-        await ctx.send(f'`.remind Duration;unit(s / m / h)`')
+        await ctx.send(f'`.remind Context;Duration;unit(s / m / h)`')
     else:
+        user = ctx.message.author
         unit = 'null'
-        user = ctx.messgae.author
         context = text.split(';')[0]
         time = float(text.split(';')[1])
         smh = text.split(';')[2]
@@ -343,7 +343,7 @@ async def remind(ctx, *, text=''):
         elif smh == 'h':
             unit = "Hour(s)"
             time = time * 60
-        await ctx.send(f'{user.mention}, I will remind about: **{context}** after {duration} {unit}')
+        await ctx.send(f'I will remind {user.mention} about: **{context}** after {duration} {unit}')
         time *= 60
         while float(time) >= 0:
             await asyncio.sleep(2)
