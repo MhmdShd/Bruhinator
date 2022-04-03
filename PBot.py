@@ -133,7 +133,7 @@ async def _playCommand(ctx, *, search: str):
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(str(url), download=False)
-            time = info['duration']/60
+            time = info['duration']
             hours = int(time / 3600)
             minutes = int(((time % 3600) / 3600) * 60)
             seconds = int((((time % 3600) % 60) / 60) * 60)
