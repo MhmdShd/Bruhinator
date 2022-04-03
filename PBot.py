@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import discord
 import yt_dlp
 from discord.ext import commands
@@ -12,7 +14,7 @@ cross = '❌'
 que = []
 url = ''
 bot.remove_command('help')
-
+online_date
 def read_token():
     with open('token.txt', 'r') as f:
         lines = f.readlines()
@@ -38,8 +40,10 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_ready():
+    global online_date
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for .help"))
     bot.togetherControl = await DiscordTogether(token)
+    online_date = datetime.now()
     print('-----_____ BOT ONLINE _____-----')
     print(f'{len(bot.guilds)}')
 
@@ -60,6 +64,18 @@ async def on_message(messages):
 @bot.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency * 1000)}ms ')
+
+bot.command()
+async def online(ctx):
+    global online_date
+    now = datetime.now()
+    days = (30 - online_date.month) + now.day
+    months = now.month - online_date.month
+    if months > 1:
+        days += 30*(months-1)
+    years = now.year - online_date.year
+    days += years * 365
+    await ctx.send(f"i've been at your service for almost {days} days and still counting!")
 
 
 
