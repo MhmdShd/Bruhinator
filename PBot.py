@@ -69,9 +69,14 @@ bot.command()
 async def online(ctx):
     global online_date
     now = datetime.now()
-    days = (30 - online_date.month) + now.day
+    days = 0
     months = now.month - online_date.month
+    if months == 0:
+        days += now.day - online_date.day
+    elif months == 1:
+        days += (30 - online_date.month) + now.day
     if months > 1:
+        days += (30 - online_date.month) + now.day
         days += 30*(months-1)
     years = now.year - online_date.year
     days += years * 365
