@@ -65,7 +65,7 @@ async def on_message(messages):
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency * 1000)}ms ')
 
-bot.command()
+@bot.command()
 async def online(ctx):
     global online_date
     now = datetime.now()
