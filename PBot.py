@@ -14,7 +14,7 @@ cross = '❌'
 que = []
 url = ''
 bot.remove_command('help')
-online_date = datetime
+online_date
 def read_token():
     with open('token.txt', 'r') as f:
         lines = f.readlines()
@@ -65,21 +65,18 @@ async def on_message(messages):
 async def ping(ctx):
     await ctx.send(f'Pong! {round(bot.latency * 1000)}ms ')
 
-@bot.command()
+bot.command()
 async def online(ctx):
     global online_date
     now = datetime.now()
+    days = (30 - online_date.month) + now.day
     months = now.month - online_date.month
-    if months == 0:
-        days = now.day - online_date.month
-    elif months == 1:
-        days = (30 - online_date.day) + now.day
-    elif months > 1:
+    if months > 1:
         days += 30*(months-1)
-        days = (30 - online_date.day) + now.day
     years = now.year - online_date.year
     days += years * 365
     await ctx.send(f"i've been at your service for almost {days} days and still counting!")
+
 
 
 # MUSICCCCCCCCCCCC
@@ -136,7 +133,7 @@ async def _playCommand(ctx, *, search: str):
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(str(url), download=False)
-            time = info['duration']
+            time = info['duration']/60
             hours = int(time / 3600)
             minutes = int(((time % 3600) / 3600) * 60)
             seconds = int((((time % 3600) % 60) / 60) * 60)
