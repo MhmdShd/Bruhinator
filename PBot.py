@@ -69,10 +69,14 @@ async def ping(ctx):
 async def online(ctx):
     global online_date
     now = datetime.now()
-    days = (30 - online_date.month) + now.day
     months = now.month - online_date.month
-    if months > 1:
+    if months = 0:
+        days = now.day - online_date.month
+    elif months = 1:
+        days = (30 - online_date.day) + now.day
+    elif months > 1:
         days += 30*(months-1)
+        days = (30 - online_date.day) + now.day
     years = now.year - online_date.year
     days += years * 365
     await ctx.send(f"i've been at your service for almost {days} days and still counting!")
