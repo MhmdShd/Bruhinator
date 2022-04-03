@@ -14,7 +14,7 @@ cross = '❌'
 que = []
 url = ''
 bot.remove_command('help')
-online_date = datetime(2022,2,2)
+online_date = datetime
 def read_token():
     with open('token.txt', 'r') as f:
         lines = f.readlines()
