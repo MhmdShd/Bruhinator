@@ -111,12 +111,16 @@ async def _playCommand(ctx, *, search: str):
             search_results = re.findall(r'/watch\?v=(.{11})', htm_content.read().decode())
             url = 'http://www.youtube.com/watch?v=' + search_results[0]
             await ctx.send(f':mag: **searching for** `{search}`')
+
         voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
         ydl_opts = {'format': 'best'}
+
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(str(url), download=False)
-            duration = info['duration']/60
-            duration = str(duration).replace('.',':')[0:5]
+            time = info['duration']/60
+            hours = int(time / 3600)
+            minutes = int(((time % 3600) / 3600) * 60)
+            seconds = int((((time % 3600) % 60) / 60) * 60)
             title = info['title']
             channel = info['channel']
             channel_url = info['channel_url']
@@ -127,7 +131,7 @@ async def _playCommand(ctx, *, search: str):
         player = discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS)
         if len(que) == 0:
             voice.play(player, after=lambda x=None: play_next(voice))
-            embed = discord.Embed(title="Song played:", description=f"**Channel :** [{channel}]({channel_url})\n\n[{title}]({url})\n\n\nduration:  {duration}",color=discord.Color.blue())
+            embed = discord.Embed(title="Song played:", description=f"**Channel :** [{channel}]({channel_url})\n\n[{title}]({url})\n\n\nduration:  {hours}:{minutes}:{seconds}", color=discord.Color.blue())
             await ctx.send(embed=embed)
             que.append(player)
         else:
@@ -152,6 +156,7 @@ async def link(ctx):
 @bot.command(aliases=['disconnect', 'DISCONNECT', 'Disconnect', 'leave', 'LEAVE', 'Leave', 'dc', 'DC', 'Dc'])
 async def _leave(ctx):
     print(f"[.dc], from [{ctx.message.guild.name}]")
+    global que
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     if not ctx.voice_client:
         await ctx.send(':x: **I am not in a voice channel **:confused:')
@@ -159,6 +164,7 @@ async def _leave(ctx):
         if ctx.author.voice:
             if ctx.author.voice.channel == ctx.voice_client.channel:
                 await voice.disconnect()
+                que.clear()
                 await ctx.send('**Successfully disconnected** :thumbsup:')
             else:
                 await ctx.send('**You should be in my voice channel to use this command**')
