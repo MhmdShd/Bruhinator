@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0c1d0f86-c7a7-4ba7-90bf-f762c170d2bd" name="Default Changelist" comment="refixed duration of song">
+      <change beforePath="$PROJECT_DIR$/PBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token.txt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="1yXj0Saz0R3tbXc03qlGiVIVDrX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python&#10;TEXT" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="discord-application" />
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="PBot" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="pythonProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Program Files\Python39\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PBot.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Program Files\Python39\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c1d0f86-c7a7-4ba7-90bf-f762c170d2bd" name="Default Changelist" comment="" />
+      <created>1632404606867</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632404606867</updated>
+      <workItem from="1632404625511" duration="762000" />
+      <workItem from="1632408444776" duration="682000" />
+      <workItem from="1632409177044" duration="1144000" />
+      <workItem from="1632413152073" duration="75000" />
+      <workItem from="1632413901597" duration="787000" />
+      <workItem from="1632415879008" duration="3395000" />
+      <workItem from="1632521934727" duration="458000" />
+      <workItem from="1632522681843" duration="1345000" />
+      <workItem from="1632591549622" duration="170000" />
+      <workItem from="1633432684313" duration="5000" />
+      <workItem from="1633521882549" duration="26000" />
+      <workItem from="1634052805710" duration="10000" />
+      <workItem from="1635276956162" duration="1136000" />
+      <workItem from="1635280040989" duration="1083000" />
+      <workItem from="1635436165517" duration="2351000" />
+      <workItem from="1635441241488" duration="1174000" />
+      <workItem from="1635503955524" duration="1087000" />
+      <workItem from="1635627472389" duration="426000" />
+      <workItem from="1635631786849" duration="135000" />
+      <workItem from="1635666539189" duration="1992000" />
+      <workItem from="1635803448492" duration="3206000" />
+      <workItem from="1636116446086" duration="1100000" />
+      <workItem from="1636117631299" duration="541000" />
+      <workItem from="1636137738998" duration="1304000" />
+      <workItem from="1636213173197" duration="3281000" />
+      <workItem from="1636218285967" duration="3000" />
+      <workItem from="1636307848074" duration="1062000" />
+      <workItem from="1636312387085" duration="518000" />
+      <workItem from="1636314263561" duration="683000" />
+      <workItem from="1637005012319" duration="2291000" />
+      <workItem from="1637156631983" duration="1556000" />
+      <workItem from="1637162245439" duration="118000" />
+      <workItem from="1637164657949" duration="558000" />
+      <workItem from="1637346109680" duration="13000" />
+      <workItem from="1637346667429" duration="3403000" />
+      <workItem from="1637350517900" duration="171000" />
+      <workItem from="1637594840324" duration="1689000" />
+      <workItem from="1637600680835" duration="1098000" />
+      <workItem from="1637842126399" duration="607000" />
+      <workItem from="1638435782826" duration="549000" />
+      <workItem from="1638445975866" duration="2336000" />
+      <workItem from="1638448454580" duration="31000" />
+      <workItem from="1638449185786" duration="232000" />
+      <workItem from="1638570320760" duration="7390000" />
+      <workItem from="1638615340245" duration="1700000" />
+      <workItem from="1638918750654" duration="23000" />
+      <workItem from="1638918824146" duration="49000" />
+      <workItem from="1639074486993" duration="6063000" />
+      <workItem from="1639129417719" duration="4000" />
+      <workItem from="1639130040255" duration="492000" />
+      <workItem from="1639142317125" duration="37000" />
+      <workItem from="1639219855690" duration="2741000" />
+      <workItem from="1639236508870" duration="25000" />
+      <workItem from="1639237498027" duration="1310000" />
+      <workItem from="1639238838985" duration="595000" />
+      <workItem from="1639334997638" duration="1973000" />
+      <workItem from="1639383998309" duration="237000" />
+      <workItem from="1639394848329" duration="1115000" />
+      <workItem from="1639468918753" duration="2241000" />
+      <workItem from="1639488029550" duration="933000" />
+      <workItem from="1639510737560" duration="202000" />
+      <workItem from="1639561582485" duration="318000" />
+      <workItem from="1649023858711" duration="2477000" />
+      <workItem from="1649026498399" duration="7000" />
+      <workItem from="1649026655840" duration="202000" />
+      <workItem from="1649027057388" duration="40000" />
+      <workItem from="1649027359560" duration="7000" />
+      <workItem from="1649028164203" duration="239000" />
+      <workItem from="1649028510046" duration="801000" />
+      <workItem from="1651100217337" duration="461000" />
+    </task>
+    <task id="LOCAL-00001" summary="queue cleared when DC and fixed duration of song">
+      <created>1649024647742</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1649024647742</updated>
+    </task>
+    <task id="LOCAL-00002" summary="queue cleared when DC / fixed duration of song / added online command sends how many days been online">
+      <created>1649026335729</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1649026335729</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fixed online command">
+      <created>1649028194442</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1649028194442</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fixed online command">
+      <created>1649028244808</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1649028244808</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fixed online command">
+      <created>1649028372110</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1649028372110</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fixed online command">
+      <created>1649028540319</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1649028540319</updated>
+    </task>
+    <task id="LOCAL-00007" summary="refixed duration of song">
+      <created>1649028697784</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1649028697784</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="queue cleared when DC and fixed duration of song" />
+    <MESSAGE value="queue cleared when DC / fixed duration of song / added online command sends how many days been online" />
+    <MESSAGE value="fixed online command" />
+    <MESSAGE value="refixed duration of song" />
+    <option name="LAST_COMMIT_MESSAGE" value="refixed duration of song" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/script_8241_py$main.coverage" NAME="main Coverage Results" MODIFIED="1632416183666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/script_8241_py$script_8241.coverage" NAME="script-8241 Coverage Results" MODIFIED="1639238747332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/script_8241_py$scratch_4.coverage" NAME="scratch_4 Coverage Results" MODIFIED="1639510920568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/script_8241_py$Bruhinator.coverage" NAME="Bruhinator Coverage Results" MODIFIED="1639510779736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/script_8241_py$YTtest.coverage" NAME="YTtest Coverage Results" MODIFIED="1632416009095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:/Hammoudy Windows 11 backup/Coding/Python" />
+    <SUITE FILE_PATH="coverage/Bruhinator$test.coverage" NAME="test Coverage Results" MODIFIED="1651100501137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/script_8241_py$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1632416910676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+  </component>
+</project>
