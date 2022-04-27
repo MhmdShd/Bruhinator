@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0c1d0f86-c7a7-4ba7-90bf-f762c170d2bd" name="Default Changelist" comment="refixed duration of song">
-      <change beforePath="$PROJECT_DIR$/PBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token.txt" beforeDir="false" />
-    </list>
+    <list default="true" id="0c1d0f86-c7a7-4ba7-90bf-f762c170d2bd" name="Default Changelist" comment="added gitignore" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,6 +193,7 @@
       <workItem from="1649028164203" duration="239000" />
       <workItem from="1649028510046" duration="801000" />
       <workItem from="1651100217337" duration="461000" />
+      <workItem from="1651100704508" duration="383000" />
     </task>
     <task id="LOCAL-00001" summary="queue cleared when DC and fixed duration of song">
       <created>1649024647742</created>
@@ -246,7 +244,21 @@
       <option name="project" value="LOCAL" />
       <updated>1649028697784</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="refixed duration of song">
+      <created>1651100743189</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1651100743189</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added gitignore">
+      <created>1651100864079</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1651100864079</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,7 +280,8 @@
     <MESSAGE value="queue cleared when DC / fixed duration of song / added online command sends how many days been online" />
     <MESSAGE value="fixed online command" />
     <MESSAGE value="refixed duration of song" />
-    <option name="LAST_COMMIT_MESSAGE" value="refixed duration of song" />
+    <MESSAGE value="added gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="added gitignore" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/script_8241_py$main.coverage" NAME="main Coverage Results" MODIFIED="1632416183666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
