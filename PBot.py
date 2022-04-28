@@ -20,6 +20,7 @@ url = ''
 bot.remove_command('help')
 online_date = datetime
 def read_token():
+
     config = open('config.json')
     configs = json.load(config)
     return configs['token']
