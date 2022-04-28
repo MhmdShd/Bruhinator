@@ -6,8 +6,12 @@ from discord.ext import commands
 import urllib.parse, urllib.request, re
 from discord_together import DiscordTogether
 import asyncio
+from discord_slash import SlashCommandOptionType
+from discord_slash import SlashCommand, SlashContext
+from discord_slash.utils.manage_commands import create_choice, create_option
 
 bot = commands.Bot(command_prefix='.')
+slash = SlashCommand(bot, sync_commands = True)
 no_access = " You don't have access to this command :/"
 thumbs_up = '\N{THUMBS UP SIGN}'
 cross = '❌'
@@ -102,6 +106,10 @@ async def _joinCommand(ctx):
             await ctx.send(':x: **I am being controlled by another voice channel **:confused:')
     else:
         await ctx.send(':x: **You should be in a voice channel to use this command**')
+
+
+
+
 
 # play music
 @bot.command(aliases=['play', 'p', 'Play', 'PLAY'])
@@ -265,49 +273,90 @@ async def resume(ctx):
         await ctx.send(':x: **I am not connected to a voice channel.** Type `.join` to get me in')
 
 
-@bot.command()
-async def activity(ctx,*,text=''):
-    print(f"[.activity], from [{ctx.message.guild.name}]")
-    if (text == ''):
-        embed = discord.Embed(
-            title="Activites Available (by name):\n",
-            description=f"1. youtube\n2. poker\n3. chess\n4. betrayal\n5. fishing\n6. awkword\n7. spellcast \n8. doodle-crew\n9. word-snack\n10. letter-tile\n11. checkers\n\nuse .activity `activity name`",
-            color=discord.Color.purple()
-        )
-        try:
-            await ctx.send(embed = embed)
-        except:
-            try:
-                await ctx.send('no Perms to send **Embedded content** :( !')
-            except:
-                await ctx.message.author.send("I have no access to that channel.")
-    elif text != '':
-        if (ctx.author.voice):
-            if text == 'youtube' or text == 'chess' or text == 'poker' or text == 'betrayal' or text == 'fishing' or text == 'letter-league' or text == 'word-snack' or text == 'sketch-heads' or text == 'spellcast' or text == 'awkword' or text == 'checkers' or text == 'putt-party' or text == 'blazing-8s' or text == 'land-io':
-                try:
-                    link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text, max_age=86400)
-                except:
-                    await ctx.send("I need Permission to **create invite** to your voice channel!")
-            else:
-                await ctx.send(f"**{text}** is not a valid activity! (`.activity` for the available list)")
-            text = text.replace('-',' ')
-            embed = discord.Embed(
-                title=f"Your Activity is ready!\n",
-                description=f"[{text}]({link})",
-                color=discord.Color.green()
-            )
-            try:
-                await ctx.send(link)
-            except:
-                try:
-                    await ctx.send('no Perms to send **Embedded content** :( !')
-                except:
-                    await ctx.message.author.send("I have no access to that channel.")
-        else:
-            try:
-                await ctx.send('Please connect to a voice channel first!')
-            except:
-                await ctx.message.author.send("I have no access to that channel.")
+only_vc_option = create_option(
+    name="channel",
+    description="You can only choose a VC!",
+    option_type=SlashCommandOptionType.CHANNEL,
+    required=True
+)
+only_vc_option['channel_types'] = [2]
+
+
+@slash.slash(
+
+    name="activity",
+    description="Starts an activity of your choice",
+    options=[only_vc_option,
+        create_option(
+            name='game',
+            description='Chose your activity',
+            required=True,
+            option_type=3,
+            choices=[
+                create_choice(
+                    name='Youtube Together!',
+                    value='youtube',
+                ),
+                create_choice(
+                    name='Chess in the Park!',
+                    value='chess',
+                ),
+                create_choice(
+                    name='Poker Night!',
+                    value='poker',
+                ),
+                create_choice(
+                    name='Betrayal.io!',
+                    value='betrayal',
+                ),
+                create_choice(
+                    name='Fishington.io!',
+                    value='fishing',
+                ),
+                create_choice(
+                    name='Letter League!',
+                    value='letter-league',
+                ),
+                create_choice(
+                    name='Word Snack!',
+                    value='word-snack',
+                ),
+                create_choice(
+                    name='Sketch Heads!',
+                    value='sketch-heads',
+                ),
+                create_choice(
+                    name='SpellCast!',
+                    value='spellcast',
+                ),
+                create_choice(
+                    name='Awkword!',
+                    value='awkword',
+                ),
+                create_choice(
+                    name='Checkers in the Park!',
+                    value='checkers',
+                ),
+                create_choice(
+                    name='Blazing 8s!',
+                    value='blazing-8s',
+                ),
+                create_choice(
+                    name='Land-io!',
+                    value='land-io',
+                ),
+                create_choice(
+                    name='Putt Party!',
+                    value='putt-party',
+                )
+            ]
+        ),
+    ]
+
+)
+async def _slash(ctx: SlashContext,channel: discord.VoiceChannel, game: str):
+    await ctx.send(f'Activity ready in <#{channel.id}>\n{ await bot.togetherControl.create_link(channel.id, game, max_age=86400)}')
+
 
 
 @bot.command()
@@ -427,4 +476,9 @@ async def help(ctx):
             await ctx.send('no Perms to send **Embedded content** :( !')
         except:
             await ctx.message.author.send("I have no access to that channel.")
+
+
+
+
+
 bot.run(token)

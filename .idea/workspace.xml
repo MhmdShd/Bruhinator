@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0c1d0f86-c7a7-4ba7-90bf-f762c170d2bd" name="Default Changelist" comment="revoked">
+    <list default="true" id="0c1d0f86-c7a7-4ba7-90bf-f762c170d2bd" name="Default Changelist" comment="updated activities">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PBot.py" afterDir="false" />
     </list>
@@ -196,7 +196,7 @@
       <workItem from="1649028164203" duration="239000" />
       <workItem from="1649028510046" duration="801000" />
       <workItem from="1651100217337" duration="461000" />
-      <workItem from="1651100704508" duration="3039000" />
+      <workItem from="1651100704508" duration="8417000" />
     </task>
     <task id="LOCAL-00001" summary="queue cleared when DC and fixed duration of song">
       <created>1649024647742</created>
@@ -268,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651101331187</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="updated activities">
+      <created>1651104036040</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1651104036040</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +299,8 @@
     <MESSAGE value="refixed duration of song" />
     <MESSAGE value="added gitignore" />
     <MESSAGE value="revoked" />
-    <option name="LAST_COMMIT_MESSAGE" value="revoked" />
+    <MESSAGE value="updated activities" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated activities" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/script_8241_py$main.coverage" NAME="main Coverage Results" MODIFIED="1632416183666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -302,6 +310,6 @@
     <SUITE FILE_PATH="coverage/script_8241_py$YTtest.coverage" NAME="YTtest Coverage Results" MODIFIED="1632416009095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:/Hammoudy Windows 11 backup/Coding/Python" />
     <SUITE FILE_PATH="coverage/Bruhinator$test.coverage" NAME="test Coverage Results" MODIFIED="1651100501137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/script_8241_py$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1632416910676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/Bruhinator$PBot.coverage" NAME="PBot Coverage Results" MODIFIED="1651103689034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Bruhinator$PBot.coverage" NAME="PBot Coverage Results" MODIFIED="1651109121411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
