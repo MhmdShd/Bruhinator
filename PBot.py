@@ -1,7 +1,7 @@
 from datetime import datetime
 import json
 import discord
-import yt_dlp
+# import yt_dlp
 from discord.ext import commands
 import urllib.parse, urllib.request, re
 from discord_together import DiscordTogether
@@ -18,7 +18,7 @@ online_date = datetime
 def read_token():
     config = open('config.json')
     configs = json.load(config)
-    print(configs['token'])
+    return configs['token']
 
 
 token = read_token()
@@ -283,9 +283,9 @@ async def activity(ctx,*,text=''):
                 await ctx.message.author.send("I have no access to that channel.")
     elif text != '':
         if (ctx.author.voice):
-            if text == 'youtube' or text == 'chess' or text == 'poker' or text == 'betrayal' or text == 'fishing' or text == 'awkword' or text == 'spellcast' or text == 'doodle-crew' or text == 'word-snack' or text == 'letter-tile' or text == 'checkers':
+            if text == 'youtube' or text == 'chess' or text == 'poker' or text == 'betrayal' or text == 'fishing' or text == 'letter-league' or text == 'word-snack' or text == 'sketch-heads' or text == 'spellcast' or text == 'awkword' or text == 'checkers' or text == 'putt-party' or text == 'blazing-8s' or text == 'land-io':
                 try:
-                    link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text)
+                    link = await bot.togetherControl.create_link(ctx.author.voice.channel.id, text, max_age=86400)
                 except:
                     await ctx.send("I need Permission to **create invite** to your voice channel!")
             else:
@@ -297,7 +297,7 @@ async def activity(ctx,*,text=''):
                 color=discord.Color.green()
             )
             try:
-                await ctx.send(embed = embed)
+                await ctx.send(link)
             except:
                 try:
                     await ctx.send('no Perms to send **Embedded content** :( !')
