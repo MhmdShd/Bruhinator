@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0c1d0f86-c7a7-4ba7-90bf-f762c170d2bd" name="Default Changelist" comment="updated activities" />
+    <list default="true" id="0c1d0f86-c7a7-4ba7-90bf-f762c170d2bd" name="Default Changelist" comment="updated activities">
+      <change beforePath="$PROJECT_DIR$/PBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/PBot.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -193,7 +195,7 @@
       <workItem from="1649028164203" duration="239000" />
       <workItem from="1649028510046" duration="801000" />
       <workItem from="1651100217337" duration="461000" />
-      <workItem from="1651100704508" duration="10334000" />
+      <workItem from="1651100704508" duration="10353000" />
     </task>
     <task id="LOCAL-00001" summary="queue cleared when DC and fixed duration of song">
       <created>1649024647742</created>

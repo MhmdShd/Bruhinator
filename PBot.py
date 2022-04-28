@@ -459,7 +459,7 @@ async def help(ctx):
                                                             '\n\n'
                                                             '**Activities command!:**'
                                                             '\n\n'
-                                                            '1. `.activity [activity name]` **( sends a link with your desired activity! / without [activity name] i list all available activities )** \n\n\n'
+                                                            '1. `/activity **( sends a link with your desired activity! / without [activity name] i list all available activities )** \n\n\n'
                                                             '**Others!:**\n'
                                                             '\n1. `.remind` **(i remind you about anything at any time you want)**'
                                                             '\n2. `.start` **(i send a schedualed message in any channel that I have access to)**'
